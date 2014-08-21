@@ -1,0 +1,12 @@
+{
+  "name": "windtalkers",
+  "version": "0.0.0",
+  "description": "Wind widgets",
+  "main": "src/windtalkers.js",
+  "scripts": {
+    "test": "gulp mocha"
+  },
+  "author": "",
+  "license": "MIT",
+  "private": true
+}
