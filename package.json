@@ -18,11 +18,12 @@
     "gulp-plumber": "^0.6.4",
     "gulp-rename": "^1.2.0",
     "mocha": "^1.21.4",
-    "sinon": "^1.10.3",
-    "underscore": "^1.6.0"
+    "sinon": "^1.10.3"
+
   },
   "dependencies": {
     "browserify": "^5.10.1",
-    "jquery": "^2.1.1"
+    "jquery": "^2.1.1",
+    "underscore": "^1.6.0"
   }
 }

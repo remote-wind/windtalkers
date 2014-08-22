@@ -1,5 +1,3 @@
-require('../test_helper');
-
 describe('Framework/Container', function(){
     var container = require('windtalkers/framework/container');
     var $ = require('jquery');
