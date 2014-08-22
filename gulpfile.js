@@ -1,15 +1,16 @@
 var gulp = require('gulp');
-var plugins = require('gulp-load-plugins')();
+var plugins = require('gulp-load-plugins')({
+    camelize: true
+});
+
 var package = require('./package.json');
-var notifier = require('node-notifier')();
-var gutil = plugins.util;
-var mochaPhantomJS = require('gulp-mocha-phantomjs');
 
 gulp.task('default', function() {
 });
 
 gulp.task('mocha', function(){
     gulp.src('./test/tests.js')
+        .pipe(plugins.plumber())
         .pipe(plugins.browserify({
             insertGlobals : true,
             debug : true
@@ -20,15 +21,17 @@ gulp.task('mocha', function(){
         .pipe(gulp.dest('./tmp'));
 
     gulp.src('TestRunner.html')
-        .pipe(mochaPhantomJS(
+        .pipe(plugins.plumber())
+        .pipe(plugins.mochaPhantomjs(
             {
                 reporter: 'spec'
             }
-        ))
+        ));
 });
 
 gulp.task('browserify', function(){
     gulp.src('./src/js/windtalkers.js')
+        .pipe(plugins.plumber())
         .pipe(plugins.browserify({
             insertGlobals : true,
             debug : process.env.NODE_ENV !== 'production'

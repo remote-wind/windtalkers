@@ -1,7 +1,6 @@
-require('./test_helper');
+global.chai = require('chai');
+global.expect = require('chai').expect;
+global.sinon = require('sinon');
 
-describe("Test Suite", function(){
-    it("is up and running", function(){
-        expect(true).to.beTrue;
-    });
-});
+// Require test files here:
+require('./framework/container.test.js');
