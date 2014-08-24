@@ -5,7 +5,7 @@ var plugins = require('gulp-load-plugins')({
 
 var package = require('./package.json');
 
-gulp.task('default', function() {
+gulp.task('default', function(){
 });
 
 gulp.task('mocha', function(){
@@ -42,5 +42,3 @@ gulp.task('browserify', function(){
 gulp.task('watch', function(){
     gulp.watch(['./test/**/**.js', './src/js/**/**.js'], ['browserify', 'mocha']);
 });
-
-
