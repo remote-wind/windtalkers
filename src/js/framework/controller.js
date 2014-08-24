@@ -1,13 +1,10 @@
-/**
- *
- * @constructor
- */
-function Model(){
-}
+"use strict";
 
-_.extend(Model.prototype, {
+function Controller(){}
+
+_.extend(Controller.prototype, {
     /**
-     * Creates a new instance of the model with attrs as properties.
+     * Creates a new instance of the widget with attrs as properties.
      * Attribute keys are camelized.
      * @param {Object} attrs
      * @returns {Object} a new model instance
@@ -16,13 +13,13 @@ _.extend(Model.prototype, {
         return _.extend(Object.create(this), attrs);
     },
     /**
-     * Extend "subclasses" with model methods
+     * Extend "subclasses" with widget methods
      * @param {Function} constructor
      * @param {Object} extras - additional properties to add to prototype
      * @returns {Function}
      */
     extend: function(constructor, extras){
-        constructor.prototype = Object.create(Model.prototype);
+        constructor.prototype = Object.create(Controller.prototype);
         constructor.prototype.constructor = constructor;
         if (extras) {
             constructor.prototype = _.extend(constructor.prototype, extras);
@@ -31,8 +28,4 @@ _.extend(Model.prototype, {
     }
 });
 
-/**
- *
- * @param constr
- */
-module.exports = Model;
+module.exports = Controller;

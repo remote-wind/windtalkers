@@ -5,15 +5,12 @@ describe('Framework/Container', function(){
     var $ = require('jquery');
 
     before(function(){
-
       this.MockWidget = function(){}
-
-      Widget.prototype.extend(this.MockWidget);
-        _.extend(this.MockWidget.prototype, {
-            name: 'MockWidget',
-            selector: '.mock-widget',
-            startUp: function(){ this.started = true; }
-        });
+      Widget.prototype.extend(this.MockWidget, {
+          name: 'MockWidget',
+          selector: '.mock-widget',
+          startUp: function(){ this.started = true; }
+      });
     });
 
     describe('create', function(){
