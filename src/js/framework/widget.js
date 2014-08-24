@@ -15,6 +15,7 @@ _.extend(Widget.prototype, {
     extend: function(constructor){
         constructor.prototype = Object.create(Widget.prototype);
         constructor.prototype.constructor = constructor;
+        return constructor;
     }
 });
 

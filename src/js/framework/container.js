@@ -21,19 +21,21 @@ function Container(options){
 
 Container.prototype = _.extend(Container.prototype, {
     /**
-     * Takes several widget manifests and combines into an object
-     * Takes an unlimited number of arguments as members of the object
+     * Takes several Widgets and combines into an object
      *
-     * @param {Object} splat
+     * @param {array} splat
      * @returns {Object} the registered widgets
      */
-    register : function(splat){
-        return _.object(_.map(Array.prototype.slice.call(arguments),
-            function(manifest){
-                manifest["instances"] = manifest["instances"] || [];
-                return [manifest.name, manifest];
+    register : function(array){
+        return _.object(_.map(array,
+            function(widget){
+                return [
+                    widget.prototype.name,
+                    widget
+                ]
             }
         ));
+        return obj;
     },
     /**
      * Loops through the widget manifests and finds matching DOM elements and creates a widget instance for each.
@@ -46,11 +48,12 @@ Container.prototype = _.extend(Container.prototype, {
         var container = this;
         context = context || this.options.context;
         return _.each(widgets, function(widget){
-            var nodes = context.find(widget.selector);
+            var elements = context.find(widget.prototype.selector);
+
             // Loop through matching DOM elements
-            widgets[widget.name].instances = _.map(nodes, function(node){
-                var instance = new widget.Constructor(container);
-                instance.startUp(node);
+            widget.instances = _.map(elements, function(elem){
+                var instance = widget.prototype.create();
+                instance.startUp(elem);
                 return instance;
             });
             return widget;
