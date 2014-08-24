@@ -21,6 +21,9 @@ if (!sinon.useFakeXMLHttpRequest) require('sinon/lib/sinon/util/fake_xml_http_re
 require('./framework/container.test');
 require('./framework/api_client.test');
 require('./framework/model.test');
+require('./framework/widget.test');
+require('./framework/view.test');
+
 require('./app/models/station.test');
 require('./app/models/observation.test');
 

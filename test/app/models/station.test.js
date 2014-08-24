@@ -1,4 +1,4 @@
-describe("framework/station", function(){
+describe("App/Models/Station", function(){
 
     var Station = require('windtalkers/app/models/station');
 
