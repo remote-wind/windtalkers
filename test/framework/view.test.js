@@ -32,4 +32,26 @@ describe("Framework/View", function(){
             expect(this.instance.constructor).to.equal(FooView);
         });
     });
+
+    describe("render", function(){
+        beforeEach(function(){
+            this.view = FooView.prototype.create( { foo: 'bar' } );
+            this.view.template = _.template(
+                '<p><%= this.foo %></p>'
+            );
+        });
+        it("expands variables in template", function(){
+            expect(this.view.render({ foo: 'bar'}).text()).to.equal('bar');
+        });
+        it("uses default translations if available", function(){
+            this.view.template = _.template(
+                '<p><%= this.trans.dog %></p>'
+            );
+            this.view.defaultTranslations = {
+                dog : 'canem'
+            };
+            expect(this.view.render().text()).to.equal('canem');
+        });
+    });
+
 });

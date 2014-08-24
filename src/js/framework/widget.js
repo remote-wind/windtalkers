@@ -1,8 +1,6 @@
 "use strict";
 
-function Widget(){
-
-}
+function Widget(){}
 
 _.extend(Widget.prototype, {
     /**
