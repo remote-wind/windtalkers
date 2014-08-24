@@ -22,6 +22,7 @@ require('./framework/container.test');
 require('./framework/api_client.test');
 require('./framework/model.test');
 require('./app/models/station.test');
+require('./app/models/observation.test');
 
 $(function() {
     if (window.mochaPhantomJS) { mochaPhantomJS.run(); }

@@ -40,5 +40,5 @@ gulp.task('browserify', function(){
 });
 
 gulp.task('watch', function(){
-    gulp.watch(['./test/**/**.js', './src/js/**/**.js'], ['browserify', 'mocha']);
+    gulp.watch(['./test/**/**', './src/js/**/**'], ['browserify', 'mocha']);
 });
