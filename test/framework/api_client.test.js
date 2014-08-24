@@ -1,63 +1,87 @@
 describe("Framework/ApiClient", function(){
 
     var ApiClient = require('windtalkers/framework/api_client');
-    var test = this;
-    var xhr, requests;
+    var Station = require('windtalkers/app/models/station');
+    var Observation = require('windtalkers/app/models/observation');
 
     before(function () {
         this.client = new ApiClient();
-        xhr = sinon.useFakeXMLHttpRequest();
-        requests = [];
-        xhr.onCreate = function (req) { requests.push(req); };
+        $.mockjaxSettings.responseTime = 0;
     });
 
-    beforeEach(function(){
-        requests = [];
-    });
-
-    after(function () {
-        // Like before we must clean up when tampering with globals.
-        xhr.restore();
+    afterEach(function(){
+        $.mockjaxClear();
     });
 
     describe(".getStations", function(){
         beforeEach(function(){
-            this.mockjax = $.mockjax({
-                url: '/stations.json'
+            $.mockjax({
+                url: '/stations.json',
+                responseText: [
+                    {
+                        id: 666,
+                        name: 'Test Station'
+                    },
+                    {
+                        id: 999,
+                        name: 'Test Station 2'
+                    }
+                ]
             });
             this.promise = this.client.getStations();
         });
-
-        it("should get data from /stations", function(){
+        it("should get data from the proper url", function(){
             var requests = $.mockjax.mockedAjaxCalls();
             expect(requests[0].url).to.equal('/stations.json');
         });
+        it("transforms data to stations", function(){
+            return this.promise.done(function(result){
+                expect(result[0]).to.be.an.instanceof(Station);
+            });
+        });
     });
 
-    /**
     describe(".getStation", function(){
-        beforeEach(function(done){
-            this.promiseMe(this.client.getStation(1), TestResponses.station.success, done);
+        beforeEach(function(){
+            $.mockjax({
+                url: '/stations/*.json',
+                responseText: {
+                    id: 999,
+                    name: 'Test Station'
+                }
+            });
+            this.promise = this.client.getStation(1);
         });
-        it("should get data from /stations/:id", function(){
-            expect(this.request.url).toEqual('/stations/1.json');
+        it("should get data from the proper url", function(){
+            var requests = $.mockjax.mockedAjaxCalls();
+            expect(requests[0].url).to.equal('/stations/1.json');
         });
-        it("converts response to a station", function(){
-            expect(this.result instanceof Station).toBeTruthy();
+        it("transforms data to a station", function(){
+            return this.promise.done(function(result){
+                expect(result).to.be.an.instanceof(Station);
+            });
         });
     });
 
     describe(".getObservations", function(){
-        beforeEach(function(done){
-            this.promiseMe(this.client.getObservations(1), TestResponses.observations.success, done);
+        beforeEach(function(){
+            $.mockjax({
+                url: '/stations/*/observations.json',
+                responseText: [
+                    { id: 999 },
+                    { id: 666 }
+                ]
+            });
+            this.promise = this.client.getObservations(1);
         });
-        it("should get data from /stations/:id/observations", function(){
-            expect(this.request.url).toEqual('/stations/1/observations.json');
+        it("should get data from the proper url", function(){
+            var requests = $.mockjax.mockedAjaxCalls();
+            expect(requests[0].url).to.equal('/stations/1/observations.json');
         });
-        it("converts response to observations", function(){
-            expect(this.result.pop() instanceof Observation).toBeTruthy();
+        it("transforms data to a observations", function(){
+            return this.promise.done(function(result){
+                expect(result[0]).to.be.an.instanceof(Observation);
+            });
         });
     });
-     **/
-
 });
