@@ -1,3 +1,5 @@
+"use strict";
+
 /**
  * Object.create polyfill
  * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create#Polyfill

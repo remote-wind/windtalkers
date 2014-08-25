@@ -1,4 +1,3 @@
- require('windtalkers/polyfill')
+"use strict";
 
-
- 
+require('windtalkers/polyfill');

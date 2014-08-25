@@ -3,7 +3,7 @@ describe("App/Models/Station", function(){
     var Station = require('windtalkers/app/models/station');
 
     it("creates a new station instance without 'new'", function(){
-        expect(Station() instanceof Station).to.be.true;
+        expect(Station()).to.be.an.instanceof(Station);
     });
 
     beforeEach(function(){

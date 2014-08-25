@@ -4,18 +4,13 @@ global._ = require('underscore');
 
 // Chai
 var chai = global.chai = require('chai');
-global.expect = require('chai').expect;
-chai.use(require("chai-as-promised"));
+var expect = global.expect = require('chai').expect;
 
 // Mocking
 var sinon = global.sinon = require('sinon');
 var mockjax = require('jquery-mockjax/jquery.mockjax');
-
 global.$.mockjaxSettings.log = function(){}; // Mute mockjax
-
-
-// Sinon refuses to load FakeXMLHttpRequest and FakeServer on node.js so we load them manually:
-if (!sinon.useFakeXMLHttpRequest) require('sinon/lib/sinon/util/fake_xml_http_request');
+global.$.mockjax.testResponses = require('./support/test_responses');
 
 // Require test files here:
 require('./framework/container.test');
@@ -26,6 +21,7 @@ require('./framework/view.test');
 
 require('./app/models/station.test');
 require('./app/models/observation.test');
+require('./app/controllers/observations_controller.test');
 
 $(function() {
     if (window.mochaPhantomJS) { mochaPhantomJS.run(); }

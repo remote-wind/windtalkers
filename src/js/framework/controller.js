@@ -1,11 +1,12 @@
 "use strict";
 
+var ApiClient = require('windtalkers/framework/api_client');
+
 function Controller(){}
 
 _.extend(Controller.prototype, {
     /**
-     * Creates a new instance of the widget with attrs as properties.
-     * Attribute keys are camelized.
+     * Creates a new instance of the controller with attrs as properties.
      * @param {Object} attrs
      * @returns {Object} a new model instance
      */
@@ -13,7 +14,7 @@ _.extend(Controller.prototype, {
         return _.extend(Object.create(this), attrs);
     },
     /**
-     * Extend "subclasses" with widget methods
+     * Extend "subclasses" with controller methods
      * @param {Function} constructor
      * @param {Object} extras - additional properties to add to prototype
      * @returns {Function}
@@ -25,7 +26,8 @@ _.extend(Controller.prototype, {
             constructor.prototype = _.extend(constructor.prototype, extras);
         }
         return constructor;
-    }
+    },
+    client: new ApiClient()
 });
 
 module.exports = Controller;
