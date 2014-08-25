@@ -1,3 +1,5 @@
+"use strict";
+
 var Model = require('windtalkers/framework/model');
 /**
  * @constructor does not require use of `new` keyword.

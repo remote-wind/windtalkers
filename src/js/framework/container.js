@@ -1,7 +1,5 @@
-'use strict';
+"use strict";
 
-var _ = require('underscore');
-var $ = require('jquery');
 /**
  * A simple service container that contains the registered widgets and handles startup and teardown.
  * @param {Object} options
