@@ -15,7 +15,7 @@ function Station(attributes){
     return Station.prototype.create(attributes);
 }
 
-Model.prototype.extend(Station, {
+Model.prototype.extend(Model, Station, {
     /**
      * Overrides Object.toString method to output the name of the station
      * @returns {string}

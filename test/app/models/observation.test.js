@@ -1,3 +1,5 @@
+"use strict";
+
 describe("App/Models/Observation", function(){
 
     var Observation = require('windtalkers/app/models/observation');

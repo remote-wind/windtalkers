@@ -1,3 +1,5 @@
+"use strict";
+
 describe("Framework/ApiClient", function(){
 
     var ApiClient = require('windtalkers/framework/api_client');

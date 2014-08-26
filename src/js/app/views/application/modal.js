@@ -27,4 +27,4 @@ function ModalView(){
     });
 }
 
-module.exports = View.prototype.extend(ModalView);
+module.exports = View.prototype.extend(View, ModalView);

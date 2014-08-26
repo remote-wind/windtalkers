@@ -1,8 +1,7 @@
 "use strict";
 
-var ObservationsController = require('windtalkers/app/controllers/observations_controller');
-
 describe("App/Controllers/ObservationController", function(){
+    var ObservationsController = require('windtalkers/app/controllers/observations_controller');
 
     before(function(){
         this.node = $('<div>');

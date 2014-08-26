@@ -9,7 +9,7 @@ describe("Framework/Widget", function(){
     function FooWidget(){}
 
     beforeEach(function(){
-        Widget.prototype.extend(FooWidget);
+        Widget.prototype.extend(Widget, FooWidget);
     });
 
     describe("extend", function(){

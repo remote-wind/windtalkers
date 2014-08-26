@@ -1,3 +1,5 @@
+"use strict";
+
 describe('Framework/Container', function(){
     var container = require('windtalkers/framework/container');
     var Widget = require('windtalkers/framework/widget');
@@ -6,7 +8,7 @@ describe('Framework/Container', function(){
 
     before(function(){
       this.MockWidget = function(){}
-      Widget.prototype.extend(this.MockWidget, {
+      Widget.prototype.extend(Widget, this.MockWidget, {
           name: 'MockWidget',
           selector: '.mock-widget',
           startUp: function(){ this.started = true; }

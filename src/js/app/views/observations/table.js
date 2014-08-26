@@ -12,4 +12,4 @@ function TableView(){
     })
 }
 
-module.exports = View.prototype.extend(TableView, {});
+module.exports = View.prototype.extend(View, TableView, {});

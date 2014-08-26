@@ -1,35 +1,14 @@
 "use strict";
 
+var Creator = require('windtalkers/framework/creator');
+
 /**
  * Used to create prototype for views.
  * @constructor not intended for direct use.
  */
 function View(){}
 
-_.extend(View.prototype, {
-    /**
-     * Creates a new instance of the widget with attrs as properties.
-     * Attribute keys are camelized.
-     * @param {Object} attrs
-     * @returns {Object} a new model instance
-     */
-    create : function(attrs){
-        return _.extend(Object.create(this), attrs);
-    },
-    /**
-     * Extend "subclasses" with view methods
-     * @param {Function} constructor
-     * @param {Object} extras - additional properties to add to prototype
-     * @returns {Function}
-     */
-    extend: function(constructor, extras){
-        constructor.prototype = Object.create(View.prototype);
-        constructor.prototype.constructor = constructor;
-        if (extras) {
-            constructor.prototype = _.extend(constructor.prototype, extras);
-        }
-        return constructor;
-    },
+module.exports = Creator.prototype.extend(Creator, View, {
     /**
      * Expands the .template with view_data assigned as the templates context
      *  This means that any view data can be accessed with `this` from the template
@@ -61,5 +40,3 @@ _.extend(View.prototype, {
         return rendered;
     }
 });
-
-module.exports = View;

@@ -31,7 +31,7 @@ function Observation(attributes){
     return Observation.prototype.create(attributes);
 }
 
-Model.prototype.extend(Observation, {
+Model.prototype.extend(Model, Observation, {
     /**
      * Format created at date with clients localization settings
      * @param {Array} locales

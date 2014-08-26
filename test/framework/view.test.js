@@ -7,30 +7,13 @@ describe("Framework/View", function(){
      * @constructor
      */
     function FooView(){}
+    View.prototype.extend(View, FooView);
 
-    beforeEach(function(){
-        View.prototype.extend(FooView);
+    it("is extendable", function(){
+        expect(View.prototype.extend).to.exist;
     });
-
-    describe("extend", function(){
-        it("extends functions prototype", function(){
-            expect(FooView.prototype.create).to.exist;
-        });
-        it("has the proper constructor", function(){
-            var f = new FooView();
-            expect(f instanceof FooView).to.be.true;
-        });
-    });
-    describe("create", function(){
-        beforeEach(function(){
-            this.instance = FooView.prototype.create( { foo: 'bar' } );
-        });
-        it("assigns attributes to instance", function(){
-            expect(this.instance.foo).to.equal('bar');
-        });
-        it("has the correct constuctor", function(){
-            expect(this.instance.constructor).to.equal(FooView);
-        });
+    it("is a creator", function(){
+        expect(View.prototype.create).to.exist;
     });
 
     describe("render", function(){

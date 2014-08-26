@@ -1,20 +1,20 @@
 "use strict";
 
-var Controller = require('windtalkers/framework/controller')
+var Controller = require('windtalkers/framework/controller');
 var TableView = require('windtalkers/app/views/observations/table');
 /**
  *
  * @param {jQuery} $elem
- * @returns {ObservationController} instance
+ * @returns {ObservationsController} instance
  * @constructor
  */
-function ObservationController($elem){
-    return ObservationController.prototype.create({
+function ObservationsController($elem){
+    return ObservationsController.prototype.create({
         element: $elem
     });
 }
 
-module.exports = Controller.prototype.extend(ObservationController, {
+module.exports = Controller.prototype.extend(Controller, ObservationsController, {
     /**
      * Get observations for station.
      * @param {String|Number} stationId

@@ -44,7 +44,7 @@ function ModalController($element){
     return instance;
 }
 
-module.exports = Controller.prototype.extend( ModalController, {
+module.exports = Controller.prototype.extend( Controller, ModalController, {
     /**
      *
      * @returns {Object} promise

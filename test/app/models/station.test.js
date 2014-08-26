@@ -1,3 +1,5 @@
+"use strict";
+
 describe("App/Models/Station", function(){
 
     var Station = require('windtalkers/app/models/station');
