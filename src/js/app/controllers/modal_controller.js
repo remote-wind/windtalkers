@@ -65,6 +65,8 @@ module.exports = Controller.prototype.extend( ModalController, {
     show: function(content){
         var view = this.view;
         var popup = view.window;
+        this.view.root.show();
+
         return $.when( view.overlay.show(10).promise() ).done(function(){
             popup.children('.modal-contents').append(content);
             popup.show();

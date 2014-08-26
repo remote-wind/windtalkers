@@ -2,15 +2,11 @@
 
 describe('App/Controllers/ModalController', function(){
 
-    var elem, ctrl, $elem, xid, view;
+    var elem, ctrl, view;
     var ModalController = require('windtalkers/app/controllers/modal_controller');
 
-    // Warning: this spec has alot of nasty async expectations.
     beforeEach(function(){
-        xid = _.uniqueId();
-        $elem = $('<div id="modal-test-fixture">');
-        ctrl = ModalController($elem);
-        elem = ctrl.element;
+        ctrl = ModalController($('<div id="modal-test-fixture">'));
         view = ctrl.view;
     });
 
@@ -24,12 +20,12 @@ describe('App/Controllers/ModalController', function(){
            this.action =  ctrl.show("<p>Hello World</p>");
         });
 
-        xit("AAARRG! shows the overlay", function(){
+        it("shows the overlay", function(){
             return this.action.done(function(overlay){
                 expect(overlay.is(':visible')).to.be.true;
             });
         });
-        xit("AAARRG! shows the modal window", function(){
+        it("shows the modal window", function(){
             return this.action.done(function(){
                 expect(view.window.is(':visible')).to.be.true;
             });
