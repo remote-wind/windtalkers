@@ -38,9 +38,11 @@ _.extend(View.prototype, {
      * @returns {jQuery}
      */
     render : function(view_data, translations){
+        var rendered;
+
         view_data = view_data || {};
         translations =  _.defaults(translations || {}, this.defaultTranslations || {});
-        var expanded = this.template.call(
+        rendered = $(this.template.call(
             _.extend(
                 view_data, {
                     trans: _.defaults(translations || {}, this.defaultTranslations || {})
@@ -50,8 +52,13 @@ _.extend(View.prototype, {
                 // shortcut to translations
                 t : translations
             }
-        );
-        return $(expanded);
+        ));
+
+        if (_.isFunction(this['afterRender'])) {
+            this.afterRender(rendered);
+        }
+
+        return rendered;
     }
 });
 
