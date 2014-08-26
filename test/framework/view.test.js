@@ -1,3 +1,5 @@
+"use strict";
+
 describe("Framework/View", function(){
 
     var View = require('windtalkers/framework/view');
@@ -6,7 +8,9 @@ describe("Framework/View", function(){
      * This is just a sample constructor of a widget.
      * @constructor
      */
-    function FooView(){}
+    function FooView(){
+        return FooView.prototype.create({ template : _.template('<p><%= this.foo %></p>' )})
+    }
     View.prototype.extend(View, FooView);
 
     it("is extendable", function(){
@@ -18,10 +22,8 @@ describe("Framework/View", function(){
 
     describe("render", function(){
         beforeEach(function(){
-            this.view = FooView.prototype.create( { foo: 'bar' } );
-            this.view.template = _.template(
-                '<p><%= this.foo %></p>'
-            );
+            this.view = FooView();
+
         });
         it("expands variables in template", function(){
             expect(this.view.render({ foo: 'bar'}).text()).to.equal('bar');

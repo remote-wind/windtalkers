@@ -7,18 +7,16 @@ function ModalController($element){
 
     var $window = $(window),
         $body = $('body'),
-        $document = $(document);
-
-
-    var instance = ModalController.prototype.create({
-        /**
-         *
-         */
-        view : ModalView()
-        /**
-         * Rendered view.
-         */
-    });
+        $document = $(document),
+        instance = ModalController.prototype.create({
+            /**
+             *
+             */
+            view : ModalView()
+            /**
+             * Rendered view.
+             */
+         });
 
     $element.append(instance.view.render());
     $element.hide().children().hide();
