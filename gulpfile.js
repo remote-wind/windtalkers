@@ -1,9 +1,9 @@
+"use strict";
+
 var gulp = require('gulp');
 var plugins = require('gulp-load-plugins')({
     camelize: true
 });
-
-var package = require('./package.json');
 
 gulp.task('default', function(){
 });
@@ -29,6 +29,14 @@ gulp.task('mocha', function(){
         ));
 });
 
+
+gulp.task('sass', function () {
+    gulp.src('./src/styles/*.scss')
+        .pipe(plugins.sass())
+        .pipe(gulp.dest('./build/css'));
+});
+
+
 gulp.task('browserify', function(){
     gulp.src('./src/js/windtalkers.js')
         .pipe(plugins.plumber())
@@ -41,4 +49,6 @@ gulp.task('browserify', function(){
 
 gulp.task('watch', function(){
     gulp.watch(['./test/**/**', './src/js/**/**'], ['browserify', 'mocha']);
+    gulp.watch(['./src/styles/*.scss'], ['sass']);
 });
+
