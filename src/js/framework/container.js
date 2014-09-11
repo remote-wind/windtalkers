@@ -21,7 +21,7 @@ Container.prototype = _.extend(Container.prototype, {
     /**
      * Takes several Widgets and combines into an object
      *
-     * @param {array} splat
+     * @param {array} array
      * @returns {Object} the registered widgets
      */
     register : function(array){
@@ -33,7 +33,6 @@ Container.prototype = _.extend(Container.prototype, {
                 ]
             }
         ));
-        return obj;
     },
     /**
      * Loops through the widget manifests and finds matching DOM elements and creates a widget instance for each.
@@ -43,7 +42,6 @@ Container.prototype = _.extend(Container.prototype, {
      * @returns {Object}
      */
     startAll : function(widgets, context){
-        var container = this;
         context = context || this.options.context;
         return _.each(widgets, function(widget){
             var elements = context.find(widget.prototype.selector);

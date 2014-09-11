@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Windtalkers demos</title>
+
+    <!-- vendor -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/foundation/5.3.3/js/foundation.min.js"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/foundation/5.3.3/css/foundation.min.css" media="all">
+
+    <!-- app -->
+    <script src="build/js/windtalkers.js"></script>
+
+</head>
+<body>
+<div class="main row">
+    <h1>Windtalkers demos</h1>
+    <dl class="accordion" data-accordion="">
+        <dd class="accordion-navigation">
+            <a href="#readme">Readme</a>
+            <div id="readme" class="content">
+                <!-- readme.md -->
+            </div>
+        </dd>
+        <dd class="demo accordion-navigation">
+            <a href="#tableWidget">TableWidget</a>
+            <div id="tableWidget" class="content active">
+                <div class="windtalkers-widget table-widget" data-station-id="gsc"></div>
+                <pre class="source"></pre>
+            </div>
+        </dd>
+        <dd class="demo accordion-navigation">
+            <a href="#graphWidget">GraphWidget</a>
+            <div id="graphWidget" class="content active">
+                <div class="windtalkers-widget graph-widget" data-station-id="gsc"></div>
+                <pre class="source"></pre>
+            </div>
+        </dd>
+        <dd class="demo accordion-navigation">
+            <a href="#mapWidget">MapWidget</a>
+            <div id="mapWidget" class="content active">
+                <div class="windtalkers-widget map-widget"></div>
+                <pre class="source"></pre>
+            </div>
+        </dd>
+    </dl>
+
+</div>
+
+    <script>
+        // Load readme
+        $(function(){
+            $(document).foundation();
+            $.when($.get('readme.md'), $.getScript('//cdnjs.cloudflare.com/ajax/libs/marked/0.3.2/marked.min.js'))
+                .done(function(readme){
+                    $('#readme').append(marked(readme[0]));
+                });
+        });
+        // Write HTML used to generate each widget
+        $(".demo").each(function(){
+            var $el = $(this);
+            $el.find('.source').text( $('<div>').append($el.find('.windtalkers-widget')).html());
+        });
+
+    </script>
+
+</body>
+</html>
