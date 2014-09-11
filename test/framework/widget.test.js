@@ -1,3 +1,5 @@
+"use strict";
+
 describe("Framework/Widget", function(){
 
     var Widget = require('windtalkers/framework/widget');
@@ -9,7 +11,9 @@ describe("Framework/Widget", function(){
     function FooWidget(){}
 
     beforeEach(function(){
-        Widget.prototype.extend(Widget, FooWidget);
+        Widget.prototype.extend(Widget, FooWidget, {
+            selector: '.foo-widget'
+        });
     });
 
     describe("extend", function(){
@@ -32,4 +36,16 @@ describe("Framework/Widget", function(){
             expect(this.instance.constructor).to.equal(FooWidget);
         });
     });
+
+    describe("createElement", function(){
+
+        beforeEach(function(){
+            this.widget = FooWidget.prototype.create();
+        });
+
+        it("adds the correct classes", function(){
+            expect(this.widget.createElement().filter('.foo-widget').length).to.equal(1);
+        });
+    });
+
 });

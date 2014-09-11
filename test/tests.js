@@ -11,6 +11,7 @@ global.sinon = require('sinon');
 require('jquery-mockjax/jquery.mockjax');
 global.$.mockjaxSettings.log = function(){}; // Mute mockjax
 global.$.mockjax.testResponses = require('./support/test_responses');
+global.$.mockjaxSettings.responseTime = 5;
 
 // Require test files here:
 

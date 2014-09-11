@@ -18,6 +18,8 @@ var Observation = require('windtalkers/app/models/observation');
  * @see http://wiki.commonjs.org/wiki/Promises
  */
 function ApiClient(){
+    var baseUrl = 'http://www.blast.nu';
+
     /**
      * Get all stations
      * @returns {Object} a Promise object.
@@ -25,7 +27,7 @@ function ApiClient(){
     this.getStations = function(){
         return jQuery.ajax({
             dataType: 'json',
-            url: '/stations.json'
+            url: baseUrl + '/stations.json'
         }).then(function(data){
             return _.map(data, function(s){
                 return Station(s);
@@ -40,7 +42,7 @@ function ApiClient(){
     this.getStation = function(id) {
         return jQuery.ajax({
             dataType: 'json',
-            url: '/stations/%id.json'.replace('%id', id)
+            url: baseUrl + '/stations/%id.json'.replace('%id', id)
         }).then(function(data){
             return Station(data);
         });
@@ -53,7 +55,7 @@ function ApiClient(){
     this.getObservations = function(station_id){
         return jQuery.ajax({
             dataType: 'json',
-            url:'/stations/%id/observations.json'.replace('%id', station_id)
+            url: baseUrl + '/stations/%id/observations.json'.replace('%id', station_id)
         }).then(function(data){
             return _.map(data, function(obj){
                 return Observation(obj);

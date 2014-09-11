@@ -13,9 +13,4 @@ describe("App/Widgets/ModalWidget", function(){
             expect(this.widget.startUp($('<div>')).controller).to.be.an.instanceof(ModalController);
         })
     });
-    describe('createElement', function(){
-       it("adds the correct classes", function(){
-          expect(this.widget.createElement().filter(this.widget.selector).length).to.equal(1);
-       });
-    });
 });

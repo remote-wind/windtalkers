@@ -12,7 +12,7 @@ function Container(options){
          *  Can be used to limit the scope to search for widgets in.
          *  Also can be used to stub in a fixture.
          */
-        context : $("body"),
+        context : $(document),
         baseUrl: 'http://www.blast.nu'
     });
 }
@@ -49,7 +49,7 @@ Container.prototype = _.extend(Container.prototype, {
             // Loop through matching DOM elements
             widget.instances = _.map(elements, function(elem){
                 var instance = widget.prototype.create();
-                instance.startUp(elem);
+                instance.startUp($(elem));
                 return instance;
             });
             return widget;

@@ -15,14 +15,6 @@ module.exports = Widget.prototype.extend(Widget, ModalWidget, {
     name: "ModalWidget",
     selector: '.modal-widget',
     /**
-     * Create the wrapping element
-     * @returns {jQuery}
-     */
-    createElement : function(){
-        return $('<div class="windtalkers-widget">')
-            .addClass(this.selector.replace('.', ''));
-    },
-    /**
      * @param {jQuery} $elem
      * @returns {ModalWidget}
      */

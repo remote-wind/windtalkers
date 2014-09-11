@@ -18,7 +18,7 @@ describe("Framework/ApiClient", function(){
     describe(".getStations", function(){
         beforeEach(function(){
             $.mockjax({
-                url: '/stations.json',
+                url: '*/stations.json',
                 responseText: [
                     {
                         id: 666,
@@ -34,7 +34,7 @@ describe("Framework/ApiClient", function(){
         });
         it("should get data from the proper url", function(){
             var requests = $.mockjax.mockedAjaxCalls();
-            expect(requests[0].url).to.equal('/stations.json');
+            expect(requests[0].url).to.contain('/stations.json');
         });
         it("transforms data to stations", function(){
             return this.promise.done(function(result){
@@ -46,7 +46,7 @@ describe("Framework/ApiClient", function(){
     describe(".getStation", function(){
         beforeEach(function(){
             $.mockjax({
-                url: '/stations/*.json',
+                url: '*/stations/*.json',
                 responseText: {
                     id: 999,
                     name: 'Test Station'
@@ -56,7 +56,7 @@ describe("Framework/ApiClient", function(){
         });
         it("should get data from the proper url", function(){
             var requests = $.mockjax.mockedAjaxCalls();
-            expect(requests[0].url).to.equal('/stations/1.json');
+            expect(requests[0].url).to.contain('/stations/1.json');
         });
         it("transforms data to a station", function(){
             return this.promise.done(function(result){
@@ -68,7 +68,7 @@ describe("Framework/ApiClient", function(){
     describe(".getObservations", function(){
         beforeEach(function(){
             $.mockjax({
-                url: '/stations/*/observations.json',
+                url: '*/stations/*/observations.json',
                 responseText: [
                     { id: 999 },
                     { id: 666 }
@@ -78,7 +78,7 @@ describe("Framework/ApiClient", function(){
         });
         it("should get data from the proper url", function(){
             var requests = $.mockjax.mockedAjaxCalls();
-            expect(requests[0].url).to.equal('/stations/1/observations.json');
+            expect(requests[0].url).to.contain('/stations/1/observations.json');
         });
         it("transforms data to a observations", function(){
             return this.promise.done(function(result){
