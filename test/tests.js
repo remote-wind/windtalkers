@@ -1,14 +1,8 @@
-// Libraries
-global.$ = global.jQuery = require('jquery');
-global._ = require('underscore');
-
 // Chai
-global.chai = require('chai');
-global.expect = require('chai').expect;
+global.expect = chai.expect;
 
 // Mocking
 global.sinon = require('sinon');
-require('jquery-mockjax/jquery.mockjax');
 global.$.mockjaxSettings.log = function(){}; // Mute mockjax
 global.$.mockjax.testResponses = require('./support/test_responses');
 global.$.mockjaxSettings.responseTime = 5;
