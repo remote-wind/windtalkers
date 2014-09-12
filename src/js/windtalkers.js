@@ -1,6 +1,5 @@
 "use strict";
 
-
 require('windtalkers/polyfill');
 var Creator = require('windtalkers/framework/creator');
 var Container = require('windtalkers/framework/container');
@@ -17,7 +16,8 @@ Creator.prototype.extend(Creator, Windtalkers, {
         var widgets = {};
         widgets.registered = this.container.register([
             require('windtalkers/app/widgets/modal_widget'),
-            require('windtalkers/app/widgets/table_widget')
+            require('windtalkers/app/widgets/table_widget'),
+            require('windtalkers/app/widgets/map_widget')
         ]);
         widgets.started = this.container.startAll(widgets.registered);
         return widgets;

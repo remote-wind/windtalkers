@@ -21,31 +21,21 @@ module.exports = Controller.prototype.extend(Controller, StationsController, {
      * @returns {Object} a promise
      */
     index : function(view) {
-        var controller = this, promise;
-
-        if ((view && typeof view !== 'MapView') || (global.google && global.google['maps'])) {
-            promise = $.when(this.client.getStations());
-        } else {
-            promise = $.when(
-                this.client.getStations(),
-                jQuery.getScript('https://maps.googleapis.com/maps/api/js')
-            );
-        }
-
-        return promise.then(function(stations, google){
-            view = view || MapView(google || global.google);
-
-            return {
-                element: controller.element,
-                view: view,
-                rendered: view.render({
-                    stations: stations
-                })
-            }
-        }).then(function(state){
-            controller.element.empty();
-            controller.element.append(state.rendered);
-            return state;
-        });
+        var controller = this;
+        view = view || MapView();
+        return $.when(this.client.getStations())
+            .then(function(stations){
+                return {
+                    element: controller.element,
+                    view: view,
+                    rendered: view.render({
+                        stations: stations
+                    })
+                }
+            }).then(function(state){
+                controller.element.empty();
+                controller.element.append(state.rendered);
+                return state;
+            });
     }
 });

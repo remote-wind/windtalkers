@@ -8,13 +8,18 @@ var View = require('windtalkers/framework/view');
  */
 function MapView(google){
     return MapView.prototype.create(function(instance){
-        instance.gmaps = google.maps;
+        if (google) {
+            instance.gmaps = google.maps;
+        }
     });
 }
 
 module.exports = View.prototype.extend(View, MapView, {
     defaultTranslations : {
         show_all : "Show all"
+    },
+    setGmaps : function(google_maps){
+      this.gmaps = google_maps;
     },
     /**
      * @type {Function}
@@ -31,7 +36,11 @@ module.exports = View.prototype.extend(View, MapView, {
      * @param {Object} mapOptions see google.maps.MapOptions for valid options
      **/
     createMap: function(element, mapOptions){
-        var gmaps = this.gmaps;
+        var gmaps = global.google.maps;
+
+        if (element.jquery) {
+            element = element[0];
+        }
         return new gmaps.Map(element, _.defaults(mapOptions || {}, {
             center: new gmaps.LatLng(63.399313, 13.082236),
             zoom: 10,
@@ -48,7 +57,7 @@ module.exports = View.prototype.extend(View, MapView, {
     updateMap: function (data, onClick) {
         var map = data.map;
         var markers;
-        var gmaps = this.gmaps;
+        var gmaps = global.google.maps;
 
         /**
          * Creates an icon for station depending on station state.

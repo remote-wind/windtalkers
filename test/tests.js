@@ -32,6 +32,7 @@ require('./app/views/stations/map.test');
 
 require('./app/widgets/modal_widget.test');
 require('./app/widgets/table_widget.test');
+require('./app/widgets/map_widget.test');
 
 
 
