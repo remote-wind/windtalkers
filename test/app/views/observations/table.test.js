@@ -34,11 +34,6 @@ describe("App/Views/Observations/Table", function(){
        this.sandbox.append(this.rendered);
     });
 
-    after(function(){
-        this.sandbox.remove();
-    });
-
-
     describe("render", function(){
         it("displays the stations name", function(){
             expect(this.rendered.text()).to.contain('Test Station');
@@ -58,12 +53,12 @@ describe("App/Views/Observations/Table", function(){
 
         it("shows observations on page", function(){
             this.rendered.find('a.page:last').click();
-            expect(this.rendered.find('.observation:last').hasClass('hidden')).to.beFalse
+            expect(this.rendered.find('.observation:last').is(':visible')).to.be.true
         });
 
         it("hides observations on not on page", function(){
             this.rendered.find('a.page:last').click();
-            expect(this.rendered.find('.observation:first').hasClass('hidden')).to.beTrue
+            expect(this.rendered.find('.observation:first').hasClass('hidden')).to.be.true
         });
     });
 });

@@ -20,15 +20,20 @@ module.exports = Controller.prototype.extend(Controller, StationsController, {
      * @param {View} view
      * @returns {Object} a promise
      */
-    index : function(view){
-        var controller = this,
+    index : function(view) {
+        var controller = this, promise;
+
+        if ((view && typeof view !== 'MapView') || (global.google && global.google['maps'])) {
+            promise = $.when(this.client.getStations());
+        } else {
             promise = $.when(
                 this.client.getStations(),
                 jQuery.getScript('https://maps.googleapis.com/maps/api/js')
             );
+        }
 
         return promise.then(function(stations, google){
-            view = view || MapView(google);
+            view = view || MapView(google || global.google);
 
             return {
                 element: controller.element,

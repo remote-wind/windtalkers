@@ -17,15 +17,16 @@ module.exports = Widget.prototype.extend(Widget, TableWidget, {
     selector: '.table-widget',
     /**
      * @param {jQuery} $elem
+     * @param {String|Number} stationId
      * @returns {TableWidget}
      */
     startUp: function($elem, stationId){
         var controller = ObservationsController($elem);
         stationId = stationId || $elem.data('stationId');
-        controller.index(stationId, TableView());
 
         return TableWidget({
-            controller : controller
+            controller : controller,
+            promise : controller.index(stationId, TableView())
         });
     }
 });

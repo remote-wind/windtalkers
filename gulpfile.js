@@ -48,7 +48,6 @@ gulp.task('browserify', function(){
 });
 
 gulp.task('watch', function(){
-    gulp.watch(['./test/**/**', './src/js/**/**'], ['browserify', 'mocha']);
+    gulp.watch(['./TestRunner.html','./test/**/**', './src/js/**/**'], ['browserify', 'mocha']);
     gulp.watch(['./src/styles/*.scss'], ['sass']);
 });
-

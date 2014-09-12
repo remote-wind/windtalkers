@@ -1,5 +1,6 @@
 "use strict";
 
+// @todo tests are slow since
 describe("App/Controllers/StationsController", function(){
     var StationsController = require('windtalkers/app/controllers/stations_controller');
 

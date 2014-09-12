@@ -1,3 +1,4 @@
+"use strict";
 // Chai
 global.expect = chai.expect;
 
@@ -32,7 +33,17 @@ require('./app/views/stations/map.test');
 require('./app/widgets/modal_widget.test');
 require('./app/widgets/table_widget.test');
 
+
+
 $(function(){
     if (window.mochaPhantomJS) { mochaPhantomJS.run(); }
     else { mocha.run(); }
+});
+
+before(function(){
+    this.sandbox = $('#sandbox');
+});
+
+afterEach(function(){
+    this.sandbox.empty();
 });
