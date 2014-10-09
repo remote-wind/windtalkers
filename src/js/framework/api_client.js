@@ -18,8 +18,7 @@ var Observation = require('windtalkers/app/models/observation');
  * @see http://wiki.commonjs.org/wiki/Promises
  */
 function ApiClient(){
-    var baseUrl = 'http://www.blast.nu';
-
+    var baseUrl = (window.location.host === 'www.blast.nu') ? '' : 'http://www.blast.nu';
     /**
      * Get all stations
      * @returns {Object} a Promise object.
