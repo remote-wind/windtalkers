@@ -11,7 +11,7 @@ module.exports = {
     },
     stations: {
         success: {
-            url: '/stations.json',
+            url: /stations\.json/,
             status: 200,
             responseText: JSON.stringify(
                 [
@@ -90,7 +90,7 @@ module.exports = {
     },
     observations: {
         success: {
-            url: '/stations/*/observations.json',
+            url: /stations\/[\w|-]*\/observations.json/,
             status: 200,
             responseText: [
                 {
@@ -120,7 +120,7 @@ module.exports = {
     },
     station: {
         success: {
-            url: '/stations/*.json',
+            url: /stations\/[\w|-]*\.json/,
             status: 200,
             responseText: {
                 "id" : 2,
