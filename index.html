@@ -3,61 +3,53 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>Windtalkers demos</title>
+    <link rel="stylesheet" href="build/css/windtalkers.css" media="all" >
+    <link rel="stylesheet" href="build/css/demo.css" media="all" >
     <!-- vendor -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/foundation/5.3.3/js/foundation.min.js"></script> -->
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/foundation/5.3.3/css/foundation.min.css" media="all">
+    <script src="node_modules/jquery-mockjax/jquery.mockjax.js"></script>
+    <script src="tmp/test_responses.js"></script>
     <!-- app -->
     <script src="build/js/windtalkers.js"></script>
-    <link rel="stylesheet" href="build/css/windtalkers.css" media="all" >
-    <link rel="stylesheet" href="build/css/demo.css" media="all" >
 </head>
 <body>
 <div class="main row">
-    <h1>Windtalkers demos</h1>
-    <dl class="accordion" data-accordion="">
-        <dd class="accordion-navigation">
-            <a href="#readme">Readme</a>
-            <div id="readme" class="content">
-                <!-- readme.md -->
+    <section id="readme" class="content"></section>
+    <ul class="demos">
+        <li class="demo">
+            <h2  id="tableWidget" class="linkable">TableWidget</h2>
+            <div class="content active">
+            <div class="windtalkers-widget table-widget" data-station-id="gsc">
+                <p>Loading...</p>
             </div>
-        </dd>
-        <dd class="demo accordion-navigation">
-            <a href="#tableWidget">TableWidget</a>
-            <div id="tableWidget" class="content active">
-<div class="windtalkers-widget table-widget" data-station-id="gsc">
-    <p>Loading...</p>
-</div>
                 <pre class="source"></pre>
             </div>
-        </dd>
-        <dd class="demo accordion-navigation">
-            <a href="#graphWidget">GraphWidget</a>
-            <div id="graphWidget" class="content active">
-<div class="windtalkers-widget graph-widget" data-station-id="gsc">
-    <p>Loading...</p>
-</div>
+        </li>
+        <li class="demo">
+            <h2 id="graphWidget" class="linkable">GraphWidget</h2>
+            <div class="content active">
+            <div class="windtalkers-widget graph-widget" data-station-id="gsc">
+                <p>Loading...</p>
+            </div>
                 <pre class="source"></pre>
             </div>
-        </dd>
-        <dd class="demo accordion-navigation">
-            <a href="#mapWidget">MapWidget</a>
-            <div id="mapWidget" class="content active">
-<div class="windtalkers-widget map-widget">
-    <p>Loading...</p>
-</div>
+        </li>
+        <li class="demo">
+            <h2 id="mapWidget" class="linkable">MapWidget</h2>
+            <div  class="content active">
+            <div class="windtalkers-widget map-widget">
+                <p>Loading...</p>
+            </div>
                 <pre class="source"></pre>
             </div>
-        </dd>
-    </dl>
-
+        </li>
+    </ul>
 </div>
 
     <script>
         // Load readme
         $(function(){
-            $(document).foundation();
             $.when($.get('readme.md'), $.getScript('//cdnjs.cloudflare.com/ajax/libs/marked/0.3.2/marked.min.js'))
                 .done(function(readme){
                     $('#readme').append(marked(readme[0]));
@@ -68,6 +60,162 @@
             var $el = $(this);
             $el.find('.source').text( $('<div>').append($el.find('.windtalkers-widget').clone()).html());
         });
+
+        var mock_responses = {
+            simple: {
+                success: {
+                    status: 200,
+                    responseText: '{"foo": "bar"}'
+                },
+                server_error: {
+                    status: 500,
+                    responseText: '{"error": "Oh noes!"}'
+                }
+            },
+            stations: {
+                success: {
+                    url: /stations\.json/,
+                    status: 200,
+                    responseText: JSON.stringify(
+                            [
+                                {
+                                    "id" : 4,
+                                    "latest_observation" : {
+                                        "observation" : {
+                                            "cardinal" : "E",
+                                            "created_at" : "2014-04-17T08:11:18Z",
+                                            "direction" : 90.0,
+                                            "id" : 45083,
+                                            "max_wind_speed" : 0.69999999999999996,
+                                            "min_wind_speed" : 0.0,
+                                            "speed" : 0.10000000000000001,
+                                            "station_id" : 4,
+                                            "tstamp" : 1397722278
+                                        }
+                                    },
+                                    "latitude" : 63.39564,
+                                    "longitude" : 13.073,
+                                    "name" : "Camp Åre",
+                                    "offline" : true,
+                                    "path" : "/stations/camp-are",
+                                    "slug" : "camp-are",
+                                    "url" : "http://www.blast.nu/stations/camp-are"
+                                },
+                                {
+                                    "id" : 2,
+                                    "latest_observation" : {
+                                        "observation" : {
+                                            "cardinal" : "S",
+                                            "created_at" : "2014-06-08T00:50:35Z",
+                                            "direction" : 163.0,
+                                            "id" : 54084,
+                                            "max_wind_speed" : 1.3,
+                                            "min_wind_speed" : 0.59999999999999998,
+                                            "speed" : 1.1000000000000001,
+                                            "station_id" : 2,
+                                            "tstamp" : 1402188635
+                                        }
+                                    },
+                                    "latitude" : 57.484186999999999,
+                                    "longitude" : 18.126104000000002,
+                                    "name" : "Gotlands Surfcenter",
+                                    "offline" : false,
+                                    "path" : "/stations/gsc",
+                                    "slug" : "gsc",
+                                    "url" : "http://www.blast.nu/stations/gsc"
+                                },
+                                {
+                                    "id" : 3,
+                                    "latest_observation" : {
+                                        "observation" : {
+                                            "cardinal" : "SE",
+                                            "created_at" : "2014-03-13T22:41:03Z",
+                                            "direction" : 136.0,
+                                            "id" : 39225,
+                                            "max_wind_speed" : 0.0,
+                                            "min_wind_speed" : 0.0,
+                                            "speed" : 0.0,
+                                            "station_id" : 3,
+                                            "tstamp" : 1394750463
+                                        }
+                                    },
+                                    "latitude" : 63.165050000000001,
+                                    "longitude" : 14.61619,
+                                    "name" : "Storsjön",
+                                    "offline" : true,
+                                    "path" : "/stations/storsjon",
+                                    "slug" : "storsjon",
+                                    "url" : "http://www.blast.nu/stations/storsjon"
+                                }
+                            ]
+                    )
+                }
+            },
+            observations: {
+                success: {
+                    url: /stations\/[\w|-]*\/observations.json/,
+                    status: 200,
+                    responseText: [
+                        {
+                            "id": 52677,
+                            "station_id": 2,
+                            "speed": 4.9,
+                            "direction": 39,
+                            "cardinal": "NE",
+                            "max_wind_speed": 5.7,
+                            "min_wind_speed": 3.8,
+                            "created_at": "2014-06-03T01:14:17Z",
+                            "tstamp": 1401758057
+                        },
+                        {
+                            "id": 52678,
+                            "station_id": 2,
+                            "speed": 4.1,
+                            "direction": 94,
+                            "cardinal": "E",
+                            "max_wind_speed": 4.7,
+                            "min_wind_speed": 3.3,
+                            "created_at": "2014-06-03T01:19:21Z",
+                            "tstamp": 1401758361
+                        }
+                    ]
+                }
+            },
+            station: {
+                success: {
+                    url: /stations\/[\w|-]*\.json/,
+                    status: 200,
+                    responseText: {
+                        "id" : 2,
+                        "latest_observation" : {
+                            "observation" : {
+                                "cardinal" : "S",
+                                "created_at" : "2014-06-08T00:45:27Z",
+                                "direction" : 178.0,
+                                "id" : 54083,
+                                "max_wind_speed" : 1.8,
+                                "min_wind_speed" : 1.1000000000000001,
+                                "speed" : 1.5,
+                                "station_id" : 2,
+                                "tstamp" : 1402188327
+                            }
+                        },
+                        "latitude" : 57.484186999999999,
+                        "longitude" : 18.126104000000002,
+                        "name" : "Gotlands Surfcenter",
+                        "offline" : false,
+                        "path" : "/stations/gsc",
+                        "slug" : "gsc",
+                        "url" : "http://www.blast.nu/stations/gsc"
+                    }
+                }
+            }
+        };
+
+        $.mockjax(mock_responses.station.success);
+        $.mockjax(mock_responses.stations.success);
+        $.mockjax(mock_responses.observations.success);
+
     </script>
 </body>
 </html>

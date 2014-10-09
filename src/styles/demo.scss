@@ -1,3 +1,19 @@
+
+body {
+  font-family: "Helvetica Neue Light", "Helvetica", "Arial", sans-serif;
+  font-size: 1em;
+}
+
+h1, h2, h3, h4 { font-weight: normal; }
+
+h1 {
+  font-size: 1.6rem;
+}
+
+h2 {
+  font-size: 1.4rem;
+}
+
 .source {
     background-color: lightyellow;
     padding: 1em;
@@ -5,4 +21,15 @@
 
 .main.row {
   margin-bottom: 10em;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+ul.demos {
+  padding-left: 0;
+  list-style-type: none;
+}
+
+li.demo {
+
 }

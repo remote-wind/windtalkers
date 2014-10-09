@@ -30,7 +30,8 @@ module.exports = Controller.prototype.extend(Controller, StationsController, {
                     view: view,
                     rendered: view.render({
                         stations: stations
-                    })
+                    }),
+                    stations: stations
                 }
             }).then(function(state){
                 controller.element.empty();

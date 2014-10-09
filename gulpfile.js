@@ -1,13 +1,10 @@
 "use strict";
 
 var gulp = require('gulp');
-var plugins = require('gulp-load-plugins')({
-    camelize: true
-});
+var plugins = require('gulp-load-plugins')({ camelize: true }); // will load any "gulp-" modules.
 
-gulp.task('default', function(){
-});
-
+// Main test suite runner.
+// Browserifies tests and runs them in Phantom.js
 gulp.task('mocha', function(){
     gulp.src('./test/tests.js')
         .pipe(plugins.plumber())
@@ -22,20 +19,26 @@ gulp.task('mocha', function(){
 
     gulp.src('TestRunner.html')
         .pipe(plugins.plumber())
-        .pipe(plugins.mochaPhantomjs(
-            {
-                reporter: 'spec'
-            }
-        ));
+        .pipe(plugins.mochaPhantomjs({
+            reporter: 'spec'
+        }));
 });
 
+// Browserify mocked API responses for demos
+gulp.task('mockjax', function(){
+    gulp.src('./test/support/test_responses.js')
+        .pipe(plugins.plumber())
+        .pipe(plugins.browserify({
+            insertGlobals : true
+        }))
+        .pipe(gulp.dest('./tmp'))
+});
 
 gulp.task('sass', function () {
     gulp.src('./src/styles/*.scss')
         .pipe(plugins.sass())
         .pipe(gulp.dest('./build/css'));
 });
-
 
 gulp.task('browserify', function(){
     gulp.src('./src/js/windtalkers.js')
@@ -50,4 +53,5 @@ gulp.task('browserify', function(){
 gulp.task('watch', function(){
     gulp.watch(['./TestRunner.html','./test/**/**', './src/js/**/**'], ['browserify', 'mocha']);
     gulp.watch(['./src/styles/*.scss'], ['sass']);
+    gulp.watch(['./test/support/test_responses.js'], ['mockjax']);
 });

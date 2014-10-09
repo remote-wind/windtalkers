@@ -1,9 +1,7 @@
 "use strict";
 
 describe("Framework/View", function(){
-
     var View = require('windtalkers/framework/view');
-
     /**
      * This is just a sample constructor of a widget.
      * @constructor
@@ -23,7 +21,6 @@ describe("Framework/View", function(){
     describe("render", function(){
         beforeEach(function(){
             this.view = FooView();
-
         });
         it("expands variables in template", function(){
             expect(this.view.render({ foo: 'bar'}).text()).to.equal('bar');
@@ -38,5 +35,4 @@ describe("Framework/View", function(){
             expect(this.view.render().text()).to.equal('canem');
         });
     });
-
 });

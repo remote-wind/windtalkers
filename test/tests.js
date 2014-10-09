@@ -6,7 +6,7 @@ global.expect = chai.expect;
 global.sinon = require('sinon');
 global.$.mockjaxSettings.log = function(){}; // Mute mockjax
 global.$.mockjax.testResponses = require('./support/test_responses');
-global.$.mockjaxSettings.responseTime = 5;
+global.$.mockjaxSettings.responseTime = 1;
 
 // Require test files here:
 
@@ -33,8 +33,6 @@ require('./app/views/stations/map.test');
 require('./app/widgets/modal_widget.test');
 require('./app/widgets/table_widget.test');
 require('./app/widgets/map_widget.test');
-
-
 
 $(function(){
     if (window.mochaPhantomJS) { mochaPhantomJS.run(); }

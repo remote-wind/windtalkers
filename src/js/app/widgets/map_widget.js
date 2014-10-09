@@ -35,6 +35,9 @@ module.exports = Widget.prototype.extend(Widget, MapWidget, {
         );
         promise.done(function(api, state){
             var view = state.view;
+
+            console.log(state);
+
             state.map = view.createMap(state.element);
             view.updateMap(state);
             return state;
