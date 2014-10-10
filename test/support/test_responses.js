@@ -124,7 +124,8 @@ module.exports = {
             status: 200,
             responseText: {
                 "id" : 2,
-                "observations" :  [{
+                "latest_observation" : {
+                    "observation" : {
                         "cardinal" : "S",
                         "created_at" : "2014-06-08T00:45:27Z",
                         "direction" : 178.0,
@@ -134,8 +135,8 @@ module.exports = {
                         "speed" : 1.5,
                         "station_id" : 2,
                         "tstamp" : 1402188327
-                }]
-                ,
+                    }
+                },
                 "latitude" : 57.484186999999999,
                 "longitude" : 18.126104000000002,
                 "name" : "Gotlands Surfcenter",

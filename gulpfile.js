@@ -24,6 +24,16 @@ gulp.task('mocha', function(){
         }));
 });
 
+// Browserify mocked API responses for demos
+gulp.task('mockjax', function(){
+    gulp.src('./test/support/test_responses.js')
+        .pipe(plugins.plumber())
+        .pipe(plugins.browserify({
+            insertGlobals : true
+        }))
+        .pipe(gulp.dest('./tmp'))
+});
+
 gulp.task('sass', function () {
     gulp.src('./src/styles/*.scss')
         .pipe(plugins.sass())
@@ -43,4 +53,5 @@ gulp.task('browserify', function(){
 gulp.task('watch', function(){
     gulp.watch(['./TestRunner.html','./test/**/**', './src/js/**/**'], ['browserify', 'mocha']);
     gulp.watch(['./src/styles/*.scss'], ['sass']);
+    gulp.watch(['./test/support/test_responses.js'], ['mockjax']);
 });
