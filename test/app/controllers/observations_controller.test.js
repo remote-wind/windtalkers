@@ -6,8 +6,7 @@ describe("App/Controllers/ObservationController", function(){
     before(function(){
         this.node = $('<div>');
         this.controller = ObservationsController($('<div>'));
-        $.mockjax($.mockjax.testResponses.observations.success);
-        $.mockjax($.mockjax.testResponses.station.success);
+
     });
 
     after(function(){

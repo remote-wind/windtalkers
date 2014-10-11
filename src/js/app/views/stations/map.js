@@ -55,9 +55,6 @@ module.exports = View.prototype.extend(View, MapView, {
      * @returns {Object} data
      */
     updateMap: function (data, onClick) {
-
-        console.log(data);
-
         var map = data.map;
         var markers;
         var gmaps = global.google.maps;

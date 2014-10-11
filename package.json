@@ -28,6 +28,6 @@
     "folderify": "^0.6.0",
     "google-maps": "^2.0.0",
     "jquery": "^2.1.1",
-    "underscore": "^1.6.0"
+    "lodash": "^2.4.1"
   }
 }
