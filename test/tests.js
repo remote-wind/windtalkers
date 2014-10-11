@@ -33,6 +33,7 @@ require('./app/views/stations/map.test');
 require('./app/widgets/modal_widget.test');
 require('./app/widgets/table_widget.test');
 require('./app/widgets/map_widget.test');
+require('./app/widgets/graph_widget.test');
 
 $(function(){
     if (window.mochaPhantomJS) { mochaPhantomJS.run(); }
@@ -44,7 +45,6 @@ before(function(){
     $.mockjax($.mockjax.testResponses.observations.success);
     $.mockjax($.mockjax.testResponses.station.success);
     $.mockjax($.mockjax.testResponses.stations.success);
-
 });
 
 afterEach(function(){
