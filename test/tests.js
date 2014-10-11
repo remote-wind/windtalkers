@@ -27,6 +27,7 @@ require('./app/controllers/modal_controller.test');
 require('./app/controllers/stations_controller.test');
 
 require('./app/views/observations/table.test');
+require('./app/views/observations/graph.test');
 require('./app/views/application/modal.test');
 require('./app/views/stations/map.test');
 
@@ -42,6 +43,9 @@ $(function(){
 
 before(function(){
     this.sandbox = $('#sandbox');
+});
+
+beforeEach(function(){
     $.mockjax($.mockjax.testResponses.observations.success);
     $.mockjax($.mockjax.testResponses.station.success);
     $.mockjax($.mockjax.testResponses.stations.success);
