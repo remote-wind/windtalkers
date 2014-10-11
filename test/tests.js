@@ -41,6 +41,10 @@ $(function(){
 
 before(function(){
     this.sandbox = $('#sandbox');
+    $.mockjax($.mockjax.testResponses.observations.success);
+    $.mockjax($.mockjax.testResponses.station.success);
+    $.mockjax($.mockjax.testResponses.stations.success);
+
 });
 
 afterEach(function(){

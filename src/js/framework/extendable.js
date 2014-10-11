@@ -3,7 +3,7 @@
 function Extendable(){}
 
 // Extend the extendable. How far out is this?
-_.extend(Extendable.prototype, {
+Extendable.prototype = _.extend(Extendable.prototype, {
     /**
      * Extend "subclasses" with controller methods
      * @param {Function} parent
@@ -12,7 +12,7 @@ _.extend(Extendable.prototype, {
      * @returns {Function}
      */
     extend: function(parent, child, extras){
-        child.prototype = _.extend(child.prototype, Object.create(parent.prototype));
+        child.prototype = _.extend(child.prototype, parent.prototype);
         child.prototype.constructor = child;
         if (extras) {
             if (_.isFunction(extras)) {
@@ -23,4 +23,5 @@ _.extend(Extendable.prototype, {
         return child;
     }
 });
+
 module.exports = Extendable;
