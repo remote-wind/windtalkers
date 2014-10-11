@@ -4,28 +4,28 @@
   "description": "Wind widgets",
   "main": "src/windtalkers.js",
   "scripts": {
-    "test": "gulp mocha"
+    "test": "karma start"
   },
   "author": "",
   "license": "MIT",
   "private": true,
   "devDependencies": {
-    "chai": "^1.9.1",
-    "chai-as-promised": "^4.1.1",
+    "browserify": "^5.13.1",
     "gulp": "^3.8.7",
     "gulp-browserify": "^0.5.0",
     "gulp-load-plugins": "^0.5.3",
-    "gulp-mocha-phantomjs": "^0.5.0",
     "gulp-plumber": "^0.6.4",
     "gulp-rename": "^1.2.0",
     "gulp-sass": "^0.7.3",
     "jsdoc": "^3.3.0-alpha9",
-    "mocha": "^1.21.4",
-    "sinon": "^1.10.3"
+    "karma": "^0.12.24",
+    "karma-bro": "^0.8.0",
+    "karma-chai": "^0.1.0",
+    "karma-chrome-launcher": "^0.1.5",
+    "karma-mocha": "^0.1.9",
+    "karma-sinon": "^1.0.3"
   },
   "dependencies": {
-    "browserify": "^5.10.1",
-    "folderify": "^0.6.0",
     "google-maps": "^2.0.0",
     "jquery": "^2.1.1",
     "lodash": "^2.4.1"

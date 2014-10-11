@@ -3,28 +3,6 @@
 var gulp = require('gulp');
 var plugins = require('gulp-load-plugins')({ camelize: true }); // will load any "gulp-" modules.
 
-// Main test suite runner.
-// Browserifies tests and runs them in Phantom.js
-gulp.task('mocha', function(){
-    gulp.src('./test/tests.js')
-        .pipe(plugins.plumber())
-        .pipe(plugins.browserify({
-            insertGlobals : true,
-            debug : true,
-            paths: ['./node_modules', './src/js', './test']
-        }))
-        .pipe(plugins.rename(function(path){
-            path.basename += '_browserified'
-        }))
-        .pipe(gulp.dest('./tmp'));
-
-    gulp.src('TestRunner.html')
-        .pipe(plugins.plumber())
-        .pipe(plugins.mochaPhantomjs({
-            reporter: 'spec'
-        }));
-});
-
 gulp.task('sass', function () {
     gulp.src('./src/styles/*.scss')
         .pipe(plugins.sass())
@@ -43,6 +21,6 @@ gulp.task('browserify', function(){
 });
 
 gulp.task('watch', function(){
-    gulp.watch(['./TestRunner.html','./test/**/**', './src/js/**/**'], ['browserify', 'mocha']);
+    gulp.watch(['./src/js/**/**'], ['browserify']);
     gulp.watch(['./src/styles/*.scss'], ['sass']);
 });

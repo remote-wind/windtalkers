@@ -27,11 +27,11 @@ detailing the proposed changes. You should then reference the issue in your comm
 `$ gulp watch` will automatically concatenate the files, compile SASS and run the test suite. 
 
 ## Tests 
-The tests are written in Mocha and run in the headless browser [Phantom.js](http://phantomjs.org/).
+The tests are written in Mocha run with [Karma](http://karma-runner.github.io/0.12/index.html) in Phantom.js and Chrome.
 
 Tests live in the `/test` directory.
 
-`$ gulp watch` will automatically run the test suite when changes are detected.
-`$ gulp mocha` will run the test suite once.
+`$ gulp start` will automatically run the test suite when changes are detected.
+`$ gulp start` will run the test suite once.
  
 You can also open [TestRunner.html](TestRunner.html) to run the tests in your browser of choice (Running the tests in IE may not work!)
