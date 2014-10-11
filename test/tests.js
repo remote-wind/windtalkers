@@ -9,7 +9,6 @@ global.$.mockjax.testResponses = require('./support/test_responses');
 global.$.mockjaxSettings.responseTime = 1;
 
 // Require test files here:
-
 require('./framework/extendable.test');
 require('./framework/creator.test');
 require('./framework/container.test');
