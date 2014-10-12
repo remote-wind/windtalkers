@@ -5,16 +5,7 @@ describe("App/Views/Observations/Table", function(){
     var TableView = require('windtalkers/app/views/observations/table');
     var Observation = require('windtalkers/app/models/observation');
 
-
-    before(function(){
-        this.sandbox = $('#sandbox');
-        $('body').append(this.sandbox);
-    });
-
     beforeEach(function(){
-
-        this.sandbox.empty();
-
         this.observation = Observation({
            "cardinal" : "E",
            "created_at" : "2014-04-17T08:11:18Z",
@@ -50,12 +41,10 @@ describe("App/Views/Observations/Table", function(){
         it("adds pagination links", function(){
            expect(this.rendered.find('a.page').length).to.eq(2)
         });
-
         it("shows observations on page", function(){
             this.rendered.find('a.page:last').click();
-            expect(this.rendered.find('.observation:last').is(':visible')).to.be.true
+            expect(this.rendered.find('.observation:last').hasClass('hidden')).to.be.false
         });
-
         it("hides observations on not on page", function(){
             this.rendered.find('a.page:last').click();
             expect(this.rendered.find('.observation:first').hasClass('hidden')).to.be.true

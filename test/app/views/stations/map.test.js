@@ -102,7 +102,5 @@ describe("App/Views/Stations/Map", function(){
             google.maps.event.trigger( reupdated.markers[0], 'click' );
             expect(callback.called).to.be.true;
         });
-
     });
-    
 });

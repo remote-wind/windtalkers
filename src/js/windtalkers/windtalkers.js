@@ -17,7 +17,8 @@ Creator.prototype.extend(Creator, Windtalkers, {
         widgets.registered = this.container.register([
             require('windtalkers/app/widgets/modal_widget'),
             require('windtalkers/app/widgets/table_widget'),
-            require('windtalkers/app/widgets/map_widget')
+            require('windtalkers/app/widgets/map_widget'),
+            require('windtalkers/app/widgets/graph_widget')
         ]);
         widgets.started = this.container.startAll(widgets.registered);
         return widgets;

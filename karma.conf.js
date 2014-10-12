@@ -1,8 +1,6 @@
 // Karma configuration
 // Generated on Sat Oct 11 2014 23:44:00 GMT+0200 (CEST)
 
-require('underscore')
-
 module.exports = function(config) {
   config.set({
 
@@ -15,6 +13,7 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+        './build/css/windtalkers.css',
         './node_modules/lodash/lodash.js',
         './node_modules/jquery/dist/jquery.js',
         './node_modules/jquery-mockjax/jquery.mockjax.js',

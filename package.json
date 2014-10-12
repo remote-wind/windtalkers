@@ -11,6 +11,7 @@
   "private": true,
   "devDependencies": {
     "browserify": "^5.13.1",
+    "chai-jquery": "^2.0.0",
     "gulp": "^3.8.7",
     "gulp-browserify": "^0.5.0",
     "gulp-load-plugins": "^0.5.3",
@@ -21,7 +22,9 @@
     "karma": "^0.12.24",
     "karma-bro": "^0.8.0",
     "karma-chai": "^0.1.0",
+    "karma-chai-jquery": "^1.0.0",
     "karma-chrome-launcher": "^0.1.5",
+    "karma-jquery": "^0.1.0",
     "karma-mocha": "^0.1.9",
     "karma-sinon": "^1.0.3"
   },
