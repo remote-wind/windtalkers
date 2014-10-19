@@ -77,17 +77,19 @@ describe("App/Views/Observations/Graph", function(){
             expect(typeof this.rickshaw.update).to.equal('function');
         });
         it("creates a custom Y-Axis", function(){
-            expect(this.rickshaw.axes.y).to.exist;
+            return expect(this.rickshaw.axes.y).to.exist;
         });
         it("creates a customx X-Axis", function(){
-            expect(this.rickshaw.axes.x).to.exist;
+            return expect(this.rickshaw.axes.x).to.exist;
         });
         it("creates direction annotations", function(){
-            expect(this.rickshaw.annotator).to.exist;
+            return expect(this.rickshaw.annotator).to.exist;
         });
-    });
-
-    describe(".annotate", function(){
-        expect(/* @todo */);
+        it("sets min if maximum value in stack is under threshold", function(){
+            expect(this.rickshaw.min).to.equal(0);
+        });
+        it("sets max if maximum value in stack is under threshold", function(){
+            expect(this.rickshaw.max).to.equal(10);
+        });
     });
 });

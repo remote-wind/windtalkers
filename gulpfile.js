@@ -10,7 +10,7 @@ gulp.task('sass', function () {
 });
 
 gulp.task('browserify', function(){
-    gulp.src('./src/js/windtalkers.js')
+    gulp.src('./src/js/windtalkers/windtalkers.js')
         .pipe(plugins.plumber())
         .pipe(plugins.browserify({
             insertGlobals : true,
@@ -22,5 +22,5 @@ gulp.task('browserify', function(){
 
 gulp.task('watch', function(){
     gulp.watch(['./src/js/**/**'], ['browserify']);
-    gulp.watch(['./src/styles/*.scss'], ['sass']);
+    gulp.watch(['./src/styles/**/**.scss'], ['sass']);
 });

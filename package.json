@@ -26,7 +26,8 @@
     "karma-chrome-launcher": "^0.1.5",
     "karma-jquery": "^0.1.0",
     "karma-mocha": "^0.1.9",
-    "karma-sinon": "^1.0.3"
+    "karma-sinon": "^1.0.3",
+    "mocha-as-promised": "^2.0.0"
   },
   "dependencies": {
     "google-maps": "^2.0.0",

@@ -17,10 +17,16 @@ module.exports = View.prototype.extend(View, GraphView, {
      * Convert an array of observations to a Rickshaw.js stack.
      * @param {Array} observations
      * @returns {Array} A stack of objects - each representing a line to be drawn on graph.
+     * @todo add support for translations
      */
     stack : function(observations) {
+        // Reverse ordering if observations are in descending order
+        if (observations.length >= 2 && observations[0].tstamp > observations[1].tstamp) {
+            observations = _(observations).reverse();
+        }
         return [
             {
+                key: 'min',
                 name: 'Min Wind Speed',
                 color: "#91B4ED",
                 data: _.map(observations, function(obs){
@@ -31,6 +37,7 @@ module.exports = View.prototype.extend(View, GraphView, {
                 })
             },
             {
+                key: 'avg',
                 name: 'Average Wind Speed',
                 color: "#3064B8",
                 data: _.map(observations, function(obs){
@@ -41,8 +48,10 @@ module.exports = View.prototype.extend(View, GraphView, {
                 })
             },
             {
+                key: 'max',
                 name: 'Max Wind Speed',
                 color: "#91B4ED",
+                max_value: _.max(_.pluck(observations, 'max')),
                 data: _.map(observations, function(obs){
                     return {
                         x: obs.tstamp,
@@ -55,41 +64,48 @@ module.exports = View.prototype.extend(View, GraphView, {
     /**
      * Instantiates and configures a Rickshaw.Graph
      * @param {Array} series
-     * @param {jQuery} template
+     * @param {jQuery} $widget
      * @param {Object} options
      * @returns {Rickshaw.Graph}
      */
-    createGraph : function(series, template, options){
+    createGraph : function(series, $widget, options){
         var graph,
             time = new Rickshaw.Fixtures.Time(),
-            $scroll = template.find('.scroll-contents'), // sliding box
-            $elem = template.find('.chart'), // where the graph is rendered
+            $scroll = $widget.find('.scroll-contents'), // sliding box
+            $elem = $widget.find('.chart'), // where the graph is rendered
             width;
+
+        var graph_max = _.last(series).max_value;
+
+        // Set the values for Y axis if the max is under 10 m/s. Keeps graph from looking weird when all values are 0
+        if (graph_max < 10) {
+            options.min = options.min || 0 ;
+            options.max = options.max || 10;
+        } // else: values scale automatically
 
         // Scale after number of observations
         width = series[0].data.length *  30;
         $scroll.width(width);
-        // @todo set height dynamically
-        $elem.width(width).height(290);
-        template.find('.scroll-window').scrollLeft(999999);
+        $elem.width(width).height($elem.height() || 290);
+        $widget.find('.scroll-window').scrollLeft(999999);
 
-        graph = new Rickshaw.Graph(_.defaults(options || {}, {
+        graph = new Rickshaw.Graph(_.defaults(options, {
             renderer: 'line',
             dotSize: 2,
             series: series,
             width: $elem.innerWidth() - 20,
-            height: $elem.innerHeight() - 20
+            height: $elem.innerHeight() -20
         }));
-
+        $widget.find('.y-axis').height(graph.height); // not sure why Y axis does not automatically get correct height
         return _.extend(graph, {
             axes: {
                 x : new Rickshaw.Graph.Axis.Time({
-                    element: template.find('.x-axis')[0],
+                    element: $widget.find('.x-axis')[0],
                     graph: graph,
                     timeUnit: time.unit('15 minute')
                 }),
                 y: new Rickshaw.Graph.Axis.Y( {
-                    element: template.find('.y-axis')[0],
+                    element: $widget.find('.y-axis')[0],
                     graph: graph,
                     orientation: 'left',
                     tickFormat: function(y){
@@ -99,19 +115,14 @@ module.exports = View.prototype.extend(View, GraphView, {
             },
             annotator: new Annotator({
                 graph: graph,
-                element: template.find('.timeline')[0],
+                element: $widget.find('.timeline')[0],
                 data: series
             })
         });
     },
     /**
-     * Draw the arrows indicating wind direction.
-     * @param {Rickshaw.Graph} graph
-     * @param {Array} observations
+     * @type {Function}
      */
-    annotate : function(graph, observations){
-        graph.annotator.update(observations);
-    },
     template: _.template(
         '<% if (this.station) {  %>' +
         '<h2 class="station-name"><%= this.station.name %></h2>' +
